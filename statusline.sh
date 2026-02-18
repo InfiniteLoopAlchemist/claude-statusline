@@ -55,7 +55,7 @@ RI=${REMAIN_PCT%.*}; RI=${RI:-0}
 
 # ── API Usage (cached 60s) ──
 CACHE_FILE="/tmp/.claude-usage-cache.json"
-CACHE_TTL=60
+CACHE_TTL=5
 FIVE_PCT=0; FIVE_RESET=""; SEVEN_PCT=0; SEVEN_RESET=""
 EXTRA_ENABLED="false"; EXTRA_USED=""; EXTRA_LIMIT=""; EXTRA_PCT=0
 
