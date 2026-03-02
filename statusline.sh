@@ -61,7 +61,8 @@ EXTRA_ENABLED="false"; EXTRA_USED=""; EXTRA_LIMIT=""; EXTRA_PCT=0
 
 fetch_usage() {
   local token
-  token=$(security find-generic-password -s "Claude Code-credentials" -w 2>/dev/null | jq -r '.claudeAiOauth.accessToken' 2>/dev/null) || return 1
+  token=$(security find-generic-password -s "Claude Code-credentials" -w 2>/dev/null \
+    | python3 -c "import sys,re; m=re.search(r'\"accessToken\":\"([^\"]+)\"', sys.stdin.read()); print(m.group(1) if m else '')" 2>/dev/null) || return 1
   [ -z "$token" ] && return 1
   local resp
   resp=$(curl -s --max-time 3 "https://api.anthropic.com/api/oauth/usage" \
